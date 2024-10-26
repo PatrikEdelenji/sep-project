@@ -25,5 +25,14 @@
     <c:if test="${sessionScope.role == 'cso' || sessionScope.role == 'scso' || sessionScope.role == 'hr'}">
         <button>HR Button</button>
     </c:if>
+
+    <!-- Budget Request Button: Visible to project manager and service manager -->
+    <c:if test="${sessionScope.role == 'pm' || sessionScope.role == 'sm'}">
+        <a href="budgetRequest" class="btn btn-primary mb-2">Create Budget Request</a>
+    </c:if>
+
+    <!-- Logout button for all users -->
+        <a href="logout" class="btn btn-danger">Logout</a>
+
 </body>
 </html>
