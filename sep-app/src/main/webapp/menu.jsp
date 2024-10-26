@@ -11,9 +11,9 @@
 <body>
     <h2>Welcome, ${sessionScope.username}!</h2>
 
-    <!-- Button 1: Visible only to admin -->
-    <c:if test="${sessionScope.role == 'hr'}">
-        <button>CSO Button</button>
+    <!-- Button 1: Visible only to Customer Service Officers -->
+    <c:if test="${sessionScope.role == 'cso'}">
+        <button onclick="window.location.href='/createNewEventRequest'">Create New Event Planning Request</button>
     </c:if>
 
     <!-- Button 2: Visible to both user and admin -->
