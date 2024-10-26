@@ -29,6 +29,7 @@
     <!-- Budget Request Button: Visible to project manager and service manager -->
     <c:if test="${sessionScope.role == 'pm' || sessionScope.role == 'sm'}">
         <a href="budgetRequest" class="btn btn-primary mb-2">Create Budget Request</a>
+        <a href="staffRecruitmentRequest.jsp">Staff Recruitment Requests</a>
     </c:if>
 
     <!-- Budget Request Button: Visible to financial manager -->

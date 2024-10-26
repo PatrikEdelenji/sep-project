@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/budgetRequest")
 public class BudgetRequestServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private static final String CSV_FILE_PATH = "C:/Users/hell0/Ivys Documents/KTH Masters/Modern Methods in Software Engineering/Homeworks/Final Project/sep-project/sep-app/src/main/resources/budgetRequest.csv"; // Update with the actual file path
+    private static final String CSV_FILE_PATH = "C:/Users/hell0/Ivys Documents/KTH Masters/Modern Methods in Software Engineering/Homeworks/Final Project/sep-project/sep-app/data/budgetRequest.csv"; // Update with the actual file path
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

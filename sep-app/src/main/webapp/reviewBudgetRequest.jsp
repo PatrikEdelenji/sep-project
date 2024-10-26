@@ -37,10 +37,13 @@
                 <td><%= budgetRequest[1] %></td>
                 <td><%= budgetRequest[2] %></td>
                 <td><%= budgetRequest[3] %></td>
+                <td><%= budgetRequest.length > 5 ? budgetRequest[5] : "N/A" %></td> <!-- Display approved budget if available -->
                 <td>
                     <form action="ReviewBudgetRequestServlet" method="post" style="display:inline;">
                         <input type="hidden" name="action" value="approve">
                         <input type="hidden" name="projectName" value="<%= budgetRequest[0] %>">
+                        <label>Final Budget:</label>
+                        <input type="number" name="finalBudget" step="0.01" required>
                         <button type="submit">Approve</button>
                     </form>
                     <form action="ReviewBudgetRequestServlet" method="post" style="display:inline;">
