@@ -1,9 +1,8 @@
 package com.example;
 
+import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,9 +13,9 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet("/budgetRequest")
 public class BudgetRequestServlet extends HttpServlet {
-    // Store budget requests in memory (in a real application, this would be in a database)
-    private static List<BudgetRequest> budgetRequests = new ArrayList<>();
-
+    private static final long serialVersionUID = 1L;
+    private static final String CSV_FILE_PATH = "C:/Users/hell0/Ivys Documents/KTH Masters/Modern Methods in Software Engineering/Homeworks/Final Project/sep-project/sep-app/src/main/resources/budgetRequest.csv"; // Update with the actual file path
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -37,66 +36,35 @@ public class BudgetRequestServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         String role = (String) session.getAttribute("role");
-        String username = (String) session.getAttribute("username");
-
+        
         // Only allow SM and PM roles to submit
         if (!"sm".equals(role) && !"pm".equals(role)) {
             response.sendRedirect("menu.jsp");
             return;
         }
 
-        // Get form parameters
+        // Get form data
         String projectName = request.getParameter("projectName");
-        double currentBudget = Double.parseDouble(request.getParameter("currentBudget"));
-        double requestedAmount = Double.parseDouble(request.getParameter("requestedAmount"));
+        String currentBudget = request.getParameter("currentBudget");
+        String requestedAmount = request.getParameter("requestedAmount");
         String justification = request.getParameter("justification");
 
-        // Create new budget request
-        BudgetRequest budgetRequest = new BudgetRequest(
-            UUID.randomUUID().toString(),
-            username,
-            projectName,
-            currentBudget,
-            requestedAmount,
-            justification,
-            "Pending"
-        );
+        // Here you would typically save this to a database
 
-        budgetRequests.add(budgetRequest);
+        // Save data to CSV file
+        try (FileWriter fileWriter = new FileWriter(CSV_FILE_PATH, true);
+             PrintWriter printWriter = new PrintWriter(fileWriter)) {
 
-        // Redirect back to menu with success message
+            // Append data to CSV in the order of form fields
+            printWriter.printf("%s,%s,%s,%s%n", projectName, currentBudget, requestedAmount, justification);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error saving budget request.");
+                return;
+        }
+
+        // For now, we'll just redirect back to menu with a success message
         response.sendRedirect("menu.jsp?budgetRequestSubmitted=true");
     }
-}
-
-// BudgetRequest.java
-class BudgetRequest {
-    private String id;
-    private String requester;
-    private String projectName;
-    private double currentBudget;
-    private double requestedAmount;
-    private String justification;
-    private String status;
-
-    public BudgetRequest(String id, String requester, String projectName, 
-                        double currentBudget, double requestedAmount, 
-                        String justification, String status) {
-        this.id = id;
-        this.requester = requester;
-        this.projectName = projectName;
-        this.currentBudget = currentBudget;
-        this.requestedAmount = requestedAmount;
-        this.justification = justification;
-        this.status = status;
-    }
-
-    // Getters
-    public String getId() { return id; }
-    public String getRequester() { return requester; }
-    public String getProjectName() { return projectName; }
-    public double getCurrentBudget() { return currentBudget; }
-    public double getRequestedAmount() { return requestedAmount; }
-    public String getJustification() { return justification; }
-    public String getStatus() { return status; }
 }

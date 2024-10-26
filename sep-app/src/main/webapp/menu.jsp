@@ -31,6 +31,11 @@
         <a href="budgetRequest" class="btn btn-primary mb-2">Create Budget Request</a>
     </c:if>
 
+    <!-- Budget Request Button: Visible to financial manager -->
+    <c:if test="${sessionScope.role == 'fm'}">
+        <a href="reviewBudgetRequest.jsp">Review Budget Requests</a>
+    </c:if>
+
     <!-- Logout button for all users -->
         <a href="logout" class="btn btn-danger">Logout</a>
 
