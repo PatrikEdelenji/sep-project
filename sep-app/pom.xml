@@ -34,6 +34,12 @@
         <version>1.2</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-annotations</artifactId>
+      <version>9.4.41.v20210516</version> <!-- Match the Jetty version in your project -->
+  </dependency>
+
     <!-- Servlet API -->
     <dependency>
       <groupId>javax.servlet</groupId>
@@ -42,6 +48,8 @@
       <scope>provided</scope>
     </dependency>
   </dependencies>
+
+  
 
   <build>
     <finalName>sep-app</finalName>
@@ -53,11 +61,14 @@
         <artifactId>jetty-maven-plugin</artifactId>
         <version>9.4.41.v20210516</version>
         <configuration>
-          <webApp>
-            <descriptor>${project.basedir}/src/main/webapp/WEB-INF/web.xml</descriptor>
-          </webApp>
+            <webApp>
+                <descriptor>${project.basedir}/src/main/webapp/WEB-INF/web.xml</descriptor>
+            </webApp>
+            <configurationClasses>
+                <configurationClass>org.eclipse.jetty.annotations.AnnotationConfiguration</configurationClass>
+            </configurationClasses>
         </configuration>
-      </plugin>
+    </plugin>
     </plugins>
 
     <pluginManagement>
