@@ -16,6 +16,11 @@
         <button onclick="window.location.href='/createNewEventRequest'">Create New Event Planning Request</button>
     </c:if>
 
+    <!-- Button 2: Visible only to Senior Customer Service Officers -->
+    <c:if test="${sessionScope.role == 'scso'}">
+        <button onclick="window.location.href='/viewAllNewRequests'">View New Requests</button>
+    </c:if>
+
     <!-- Button 2: Visible to both user and admin -->
     <c:if test="${sessionScope.role == 'cso' || sessionScope.role == 'scso'}">
         <button>SCSO Button</button>
