@@ -6,14 +6,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All New Event Requests</title>
+    <title>All Event Requests</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f9f9f9; }
-        table { width: 90%; margin: 20px auto; border-collapse: collapse; }
-        th, td { padding: 10px; border: 1px solid #ddd; text-align: center; }
-        th { background-color: #333; color: #fff; }
-        tr:nth-child(even) { background-color: #f2f2f2; }
-        h2 { text-align: center; color: #333; margin-top: 20px; }
+        table { width: 80%; margin: 0 auto; border-collapse: collapse; }
+        th, td { padding: 8px 12px; border: 1px solid #ddd; text-align: center; }
+        th { background-color: #f4f4f4; }
+        h2 { text-align: center; }
     </style>
 </head>
 <body>
@@ -32,6 +30,7 @@
             <th>Meals</th>
             <th>Drinks</th>
             <th>Budget</th>
+            <th>Actions</th> <!-- New column for the action button -->
         </tr>
         <c:forEach var="request" items="${requests}">
             <tr>
@@ -47,6 +46,12 @@
                 <td>${request[9]}</td> <!-- Meals (Yes/No) -->
                 <td>${request[10]}</td> <!-- Drinks (Yes/No) -->
                 <td>${request[11]}</td> <!-- Budget -->
+                <td>
+                    <form action="fillClientRecord" method="get">
+                        <input type="hidden" name="clientRecord" value="${request[0]}" />
+                        <button type="submit">Expand</button>
+                    </form>
+                </td>
             </tr>
         </c:forEach>
     </table>
