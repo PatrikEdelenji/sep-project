@@ -21,14 +21,9 @@
         <button onclick="window.location.href='/viewAllNewRequests'">View New Requests</button>
     </c:if>
 
-    <!-- Button 2: Visible to both user and admin -->
-    <c:if test="${sessionScope.role == 'cso' || sessionScope.role == 'scso'}">
-        <button>SCSO Button</button>
-    </c:if>
-
-    <!-- Button 3: Visible to everyone (guest, user, and admin) -->
-    <c:if test="${sessionScope.role == 'cso' || sessionScope.role == 'scso' || sessionScope.role == 'hr'}">
-        <button>HR Button</button>
+    <!-- Button 3: Visible to finanical manager for budget reviews -->
+    <c:if test="${sessionScope.role == 'fm'}">
+        <button onclick="window.location.href='/viewSCSOApprovedRequests'">View received event requests</button>
     </c:if>
 </body>
 </html>

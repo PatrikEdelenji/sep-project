@@ -34,7 +34,6 @@ public class ApproveEventRequestServlet extends HttpServlet {
             String[] record;
             while ((record = csvReader.readNext()) != null) {
                 if (record[0].equals(clientRecord)) {
-                    record = appendApprovalStatus(record, "Approved-SCSO", "Waiting-FM", "Waiting-AdminDep");
                     writeRecordToCsv(approvedFilePath, record);  // Write approved record to approved_scso.csv
                 }
                 allRecords.add(record);  // Update list with the new status for all records
@@ -50,13 +49,6 @@ public class ApproveEventRequestServlet extends HttpServlet {
 
         // Redirect to the servlet that reloads the table with updated data
         response.sendRedirect("viewAllNewRequests");
-    }
-
-    private String[] appendApprovalStatus(String[] record, String... statuses) {
-        String[] updatedRecord = new String[record.length + statuses.length];
-        System.arraycopy(record, 0, updatedRecord, 0, record.length);
-        System.arraycopy(statuses, 0, updatedRecord, record.length, statuses.length);  // Append the statuses
-        return updatedRecord;
     }
 
     private void writeRecordToCsv(String filePath, String[] record) throws IOException {
