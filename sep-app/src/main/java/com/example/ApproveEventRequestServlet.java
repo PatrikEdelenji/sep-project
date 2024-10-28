@@ -34,12 +34,13 @@ public class ApproveEventRequestServlet extends HttpServlet {
             String[] record;
             while ((record = csvReader.readNext()) != null) {
                 if (record[0].equals(clientRecord)) {
-                    record = appendApprovalStatus(record, "Approved");
+                    record = appendApprovalStatus(record, "Approved-SCSO", "Waiting-FM", "Waiting-AdminDep");
                     writeRecordToCsv(approvedFilePath, record);  // Write approved record to approved_scso.csv
                 }
                 allRecords.add(record);  // Update list with the new status for all records
             }
         } catch (CsvValidationException ex) {
+            ex.printStackTrace();  // Log exceptions for troubleshooting
         }
 
         // Update the original file to reflect approval status
@@ -47,13 +48,14 @@ public class ApproveEventRequestServlet extends HttpServlet {
             csvWriter.writeAll(allRecords);
         }
 
-        response.sendRedirect("viewAllNewRequests.jsp");
+        // Redirect to the servlet that reloads the table with updated data
+        response.sendRedirect("viewAllNewRequests");
     }
 
-    private String[] appendApprovalStatus(String[] record, String status) {
-        String[] updatedRecord = new String[record.length + 1];
+    private String[] appendApprovalStatus(String[] record, String... statuses) {
+        String[] updatedRecord = new String[record.length + statuses.length];
         System.arraycopy(record, 0, updatedRecord, 0, record.length);
-        updatedRecord[record.length] = status;  // Append the approval status
+        System.arraycopy(statuses, 0, updatedRecord, record.length, statuses.length);  // Append the statuses
         return updatedRecord;
     }
 

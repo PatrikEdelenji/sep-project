@@ -48,10 +48,6 @@
                 <td>${request[11]}</td> <!-- Budget -->
                 
                 <td>
-                    <form action="fillClientRecord" method="get" style="display: inline;">
-                        <input type="hidden" name="clientRecord" value="${request[0]}" />
-                        <button type="submit">Create client record</button>
-                    </form>
                     <form action="approveRequest" method="post" style="display: inline;">
                         <input type="hidden" name="clientRecord" value="${request[0]}" />
                         <button type="submit">Approve</button>
