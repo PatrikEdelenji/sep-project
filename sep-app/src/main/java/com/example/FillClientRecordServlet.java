@@ -1,8 +1,6 @@
 package com.example;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import com.opencsv.CSVReader;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import java.io.FileReader;
+import java.io.IOException;
+
+import com.opencsv.exceptions.CsvValidationException;
 
 @WebServlet("/fillClientRecord")
 public class FillClientRecordServlet extends HttpServlet {
@@ -23,16 +25,20 @@ public class FillClientRecordServlet extends HttpServlet {
         String projectRoot = System.getProperty("user.dir");
         String filePath = projectRoot + "/data/event_requests.csv";
 
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] columns = line.split(",");
-                System.out.println("Read line: " + line);
+        // Use OpenCSV CSVReader
+        try (CSVReader csvReader = new CSVReader(new FileReader(filePath))) {
+            String[] columns;
+            while ((columns = csvReader.readNext()) != null) {
+                System.out.println("Read line: " + String.join(",", columns));
                 if (columns[0].equals(clientRecord)) { // Match client record
                     recordData = columns;
                     break;
                 }
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new ServletException("Error reading client record data", e);
+        } catch (CsvValidationException ex) {
         }
 
         if (recordData != null) {

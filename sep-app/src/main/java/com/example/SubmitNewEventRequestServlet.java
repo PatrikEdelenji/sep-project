@@ -3,12 +3,12 @@ package com.example;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.opencsv.CSVWriter;  // Ensure this import for opencsv
 
 @WebServlet("/submitNewEventRequest")
 public class SubmitNewEventRequestServlet extends HttpServlet {
@@ -45,20 +45,23 @@ public class SubmitNewEventRequestServlet extends HttpServlet {
         String projectRoot = System.getProperty("user.dir");
         String filePath = projectRoot + "/data/event_requests.csv";
 
-        // Write data in CSV format
-        try (FileWriter csvWriter = new FileWriter(filePath, true)) {
-            csvWriter.append(clientRecord).append(",")
-                     .append(clientName).append(",")
-                     .append(eventType).append(",")
-                     .append(fromDate).append(",")
-                     .append(toDate).append(",")
-                     .append(expectedAttendees).append(",")
-                     .append(decorations).append(",")
-                     .append(parties).append(",")
-                     .append(photos).append(",")
-                     .append(meals).append(",")
-                     .append(drinks).append(",")
-                     .append(budget).append("\n");
+        // Writing data in CSV format
+        try (CSVWriter csvWriter = new CSVWriter(new FileWriter(filePath, true))) {
+            String[] record = {
+                clientRecord,
+                clientName,
+                eventType,
+                fromDate,
+                toDate,
+                expectedAttendees,
+                decorations,
+                parties,
+                photos,
+                meals,
+                drinks,
+                budget
+            };
+            csvWriter.writeNext(record);  // Write data row
         } catch (IOException e) {
             e.printStackTrace();
             throw new ServletException("Error saving event request data", e);

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expanded Event Request</title>
+    <title>New Client Record</title>
     <style>
         /* Styling for the form */
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -21,8 +21,8 @@
 </head>
 <body>
     <div class="form-container">
-        <h2>Expanded Event Request</h2>
-        <form action="submitExpandedEventRequest" method="post">
+        <h2>Event request</h2>
+        <form action="submitNewClientRecord" method="post">
             <fieldset>
                 <legend>Client Information</legend>
                 <label for="clientRecord">Record Number:</label>
