@@ -24,6 +24,7 @@ public class ReviewStaffRecruitmentRequestServlet extends HttpServlet {
             throws ServletException, IOException {
         String action = request.getParameter("action");
         String positionTitle = request.getParameter("positionTitle");
+        String finalNrofStaff = request.getParameter("finalNrofStaff");
         
         // Temporary file to write updated data
         File inputFile = new File(CSV_FILE_PATH);
@@ -39,9 +40,9 @@ public class ReviewStaffRecruitmentRequestServlet extends HttpServlet {
                 // Assuming positionTitle uniquely identifies the request
                 if (requestFields[1].equals(positionTitle)) {
                     if ("approve".equals(action)) {
-                        writer.println(String.join(",", requestFields) + ",APPROVED");
+                        writer.println(String.join(",", requestFields) + "," + "APPROVED" + "," + finalNrofStaff);
                     } else {
-                        writer.println(String.join(",", requestFields) + ",DISAPPROVED");
+                        writer.println(String.join(",", requestFields) + "," + "DISAPPROVED");
                     }
                 } else {
                     writer.println(line);

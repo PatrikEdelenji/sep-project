@@ -41,18 +41,19 @@
                 <td><%= recruitmentRequest[3] %></td>
                 <td><%= recruitmentRequest[4] %></td>
                 <td><%= recruitmentRequest[5] %></td>
+                <td><%= recruitmentRequest.length > 7 ? recruitmentRequest[7] : "N/A" %></td> <!-- Display approved budget if available -->
                 <td>
-                    <form action="StaffRecruitmentRequestServlet" method="post" style="display:inline;">
-                        <input type="hidden" name="actionData" value="<%= recruitmentRequest[1] %>:approve">
-                        <label>Approved Status:</label>
-                        <select name="status">
-                            <option value="Approved">Approved</option>
-                            <option value="Disapproved">Disapproved</option>
-                        </select>
+                    <form action="ReviewStaffRecruitmentRequestServlet" method="post" style="display:inline;">
+                        <input type="hidden" name="action" value="approve">
+                        <input type="hidden" name="positionTitle" value="<%= recruitmentRequest[1] %>">
+                        <label>Final Nr of Staff:</label>
+                        <input type="number" name="finalNrofStaff" step="0.01" required>
+
                         <button type="submit">Approve</button>
                     </form>
-                    <form action="StaffRecruitmentRequestServlet" method="post" style="display:inline;">
-                        <input type="hidden" name="actionData" value="<%= recruitmentRequest[1] %>:disapprove">
+                    <form action="ReviewStaffRecruitmentRequestServlet" method="post" style="display:inline;">
+                        <input type="hidden" name="action" value="disapprove">
+                        <input type="hidden" name="positionTitle" value="<%= recruitmentRequest[1] %>">
                         <button type="submit">Disapprove</button>
                     </form>
                 </td>
