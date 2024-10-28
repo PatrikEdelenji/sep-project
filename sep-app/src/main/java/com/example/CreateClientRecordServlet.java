@@ -13,8 +13,8 @@ import java.io.IOException;
 
 import com.opencsv.exceptions.CsvValidationException;
 
-@WebServlet("/fillClientRecord")
-public class FillClientRecordServlet extends HttpServlet {
+@WebServlet("/createClientRecord")
+public class CreateClientRecordServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -23,7 +23,7 @@ public class FillClientRecordServlet extends HttpServlet {
         String[] recordData = null;
 
         String projectRoot = System.getProperty("user.dir");
-        String filePath = projectRoot + "/data/event_requests.csv";
+        String filePath = projectRoot + "/data/approved_admin.csv";
 
         // Use OpenCSV CSVReader
         try (CSVReader csvReader = new CSVReader(new FileReader(filePath))) {
@@ -60,6 +60,8 @@ public class FillClientRecordServlet extends HttpServlet {
             request.setAttribute("drinks", recordData[10]);
             System.out.println("drinks: " + recordData[10]);
             request.setAttribute("budget", recordData[11]);
+            request.setAttribute("budgetReview", recordData[12]);
+
         }
 
         request.getRequestDispatcher("/clientRecordForm.jsp").forward(request, response);

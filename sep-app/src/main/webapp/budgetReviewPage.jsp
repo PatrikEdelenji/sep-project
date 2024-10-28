@@ -22,7 +22,7 @@
 <body>
     <div class="form-container">
         <h2>Budget Review</h2>
-        <form action="submitBudgetReview" method="post">
+        <form action="updateBudgetReview" method="post">
             <fieldset>
                 <legend>Client Information</legend>
                 <label for="clientRecord">Record Number:</label>

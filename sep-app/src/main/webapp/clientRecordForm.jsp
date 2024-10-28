@@ -88,6 +88,12 @@
         <label for="drinksDescription">Drinks Description:</label>
         <textarea id="drinksDescription" name="drinksDescription">${drinksDescription}</textarea>
     </c:if>
+
+    <label for="computerNotes">IT issues:</label>
+    <textarea id="computerNotes" name="computerNotes">${computerNotes}</textarea>
+
+    <label for="otherNotes">Other notes</label>
+    <textarea id="otherNotes" name="otherNotes">${otherNotes}</textarea>
 </fieldset>
 
             <fieldset>
@@ -95,6 +101,14 @@
                 <label for="budget">Expected Budget:</label>
                 <input type="number" id="budget" name="budget" value="${budget}">
             </fieldset>
+
+            <fieldset>
+                <legend>Budget review</legend>
+                <label for="budget">Expected Budget:</label>
+                <textarea id="budgetReview" name="budgetReview">${budgetReview}</textarea>
+            </fieldset>
+
+            
 
             <button type="submit">Submit</button>
         </form>

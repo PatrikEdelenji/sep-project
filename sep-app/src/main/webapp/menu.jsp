@@ -11,19 +11,34 @@
 <body>
     <h2>Welcome, ${sessionScope.username}!</h2>
 
-    <!-- Button 1: Visible only to Customer Service Officers -->
+    <!-- BVisible only to Customer Service Officers -->
     <c:if test="${sessionScope.role == 'cso'}">
         <button onclick="window.location.href='/createNewEventRequest'">Create New Event Planning Request</button>
+        
     </c:if>
 
-    <!-- Button 2: Visible only to Senior Customer Service Officers -->
+    <!-- Visible only to Senior Customer Service Officers -->
     <c:if test="${sessionScope.role == 'scso'}">
         <button onclick="window.location.href='/viewAllNewRequests'">View New Requests</button>
+        <button onclick="window.location.href='/viewFinalApprovedRequests'">View admin approved requests</button>
     </c:if>
 
-    <!-- Button 3: Visible to finanical manager for budget reviews -->
+    <!-- Visible to finanical manager for budget reviews -->
     <c:if test="${sessionScope.role == 'fm'}">
         <button onclick="window.location.href='/viewSCSOApprovedRequests'">View received event requests</button>
     </c:if>
+
+        <!-- Visible to admin department for final review -->
+    <c:if test="${sessionScope.role == 'admin'}">
+        <button onclick="window.location.href='/viewFMApprovedRequests'">View received event requests</button>
+    </c:if>
+
+
+    <c:if test="${sessionScope.role == 'admin' || sessionScope.role == 'fm' || sessionScope.role == 'scso'}">
+ 
+        <button onclick="window.location.href='/viewCLientRecords'">View client records</button>
+    </c:if>
+
+    
 </body>
 </html>

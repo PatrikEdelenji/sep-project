@@ -48,19 +48,14 @@
                 <td>${request[10]}</td> <!-- Drinks (Yes/No) -->
                 <td>${request[11]}</td> <!-- Budget -->
                 <td>${request[12]}</td> <!-- Budget Review -->
-                
                 <td>
-                    <form action="approveBudget" method="post" style="display: inline;">
+                    <form action="approveFinalRequest" method="post" style="display: inline;">
                         <input type="hidden" name="clientRecord" value="${request[0]}" />
                         <button type="submit">Approve</button>
                     </form>
-                    <form action="rejectRequest" method="post" style="display: inline;">
+                    <form action="rejectFinalRequest" method="post" style="display: inline;">
                         <input type="hidden" name="clientRecord" value="${request[0]}" />
                         <button type="submit">Reject</button>
-                    </form>
-                    <form action="fillBudgetReview" method="get" style="display: inline;">
-                        <input type="hidden" name="clientRecord" value="${request[0]}" />
-                        <button type="submit">Review Budget</button>
                     </form>
                 </td>
             </tr>
