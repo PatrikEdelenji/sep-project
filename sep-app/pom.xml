@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
   <groupId>com.example</groupId>
   <artifactId>sep-app</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
-
   <name>sep-app Maven Webapp</name>
   <url>http://www.example.com</url>
-
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
-
   <dependencies>
+    <dependency>
+      <groupId>com.opencsv</groupId>
+      <artifactId>opencsv</artifactId>
+      <version>5.5.2</version>
+  </dependency>
     <!-- JUnit for Testing -->
     <dependency>
       <groupId>junit</groupId>
@@ -26,14 +26,17 @@
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
-
     <!-- JSTL for JSP Pages -->
     <dependency>
         <groupId>jstl</groupId>
         <artifactId>jstl</artifactId>
         <version>1.2</version>
     </dependency>
-
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-annotations</artifactId>
+      <version>10.0.13</version> <!-- Updated version to be compatible with servlet 4.0.1 -->
+  </dependency>
     <!-- Servlet API -->
     <dependency>
       <groupId>javax.servlet</groupId>
@@ -42,10 +45,9 @@
       <scope>provided</scope>
     </dependency>
   </dependencies>
-
+  
   <build>
     <finalName>sep-app</finalName>
-
     <!-- This is the section where Jetty is actually applied -->
     <plugins>
       <plugin>
@@ -53,13 +55,15 @@
         <artifactId>jetty-maven-plugin</artifactId>
         <version>9.4.41.v20210516</version>
         <configuration>
-          <webApp>
-            <descriptor>${project.basedir}/src/main/webapp/WEB-INF/web.xml</descriptor>
-          </webApp>
+            <webApp>
+                <descriptor>${project.basedir}/src/main/webapp/WEB-INF/web.xml</descriptor>
+            </webApp>
+            <configurationClasses>
+                <configurationClass>org.eclipse.jetty.annotations.AnnotationConfiguration</configurationClass>
+            </configurationClasses>
         </configuration>
-      </plugin>
+    </plugin>
     </plugins>
-
     <pluginManagement>
       <!-- Lock down plugins versions to avoid using Maven defaults -->
       <plugins>

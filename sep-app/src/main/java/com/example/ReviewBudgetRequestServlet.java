@@ -36,6 +36,7 @@ public class ReviewBudgetRequestServlet extends HttpServlet {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] requestFields = line.split(",");
+                
                 if (requestFields[0].equals(projectName)) {
                     // Append the action and final budget (for approved requests) to the end of the line
                     if ("approve".equals(action)) {

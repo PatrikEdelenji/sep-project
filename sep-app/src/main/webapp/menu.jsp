@@ -30,7 +30,7 @@
     <c:if test="${sessionScope.role == 'pm' || sessionScope.role == 'sm'}">
         <a href="budgetRequest" class="btn btn-primary mb-2">Create Budget Request</a>
         <a href="staffRecruitmentRequest.jsp">Staff Recruitment Requests</a>
-        <a href="viewApprovedRecruitmentRequests" class="btn btn-primary">Review Approved/Disapproved Requests</a>
+        <a href="reviewApprovedRecruitmentRequests.jsp" class="btn btn-primary">Review Approved/Disapproved Requests</a>
     </c:if>
 
     <!-- Budget Request Button: Visible to financial manager -->
@@ -41,6 +41,11 @@
     <!-- Recruitment Request Review Button: Visible to HR -->
     <c:if test="${sessionScope.role == 'hr'}">
         <a href="reviewStaffRecruitmentRequest.jsp">Review Staff Recruitment Requests</a>
+    </c:if>
+    
+    <!-- Job Posting Button: Visible to HR -->
+    <c:if test="${sessionScope.role == 'hr'}">
+        <a href="jobPosting" class="btn btn-primary mb-2">Create Job Posting</a>
     </c:if>
 
     <!-- Logout button for all users -->

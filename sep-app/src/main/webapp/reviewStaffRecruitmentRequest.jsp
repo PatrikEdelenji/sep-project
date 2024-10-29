@@ -28,7 +28,6 @@
             <th>Department</th>
             <th>Number of Positions</th>
             <th>Justification</th>
-            <th>Status</th>
             <th>Action</th>
         </tr>
         <%
@@ -40,8 +39,7 @@
                 <td><%= recruitmentRequest[2] %></td>
                 <td><%= recruitmentRequest[3] %></td>
                 <td><%= recruitmentRequest[4] %></td>
-                <td><%= recruitmentRequest[5] %></td>
-                <td><%= recruitmentRequest.length > 7 ? recruitmentRequest[7] : "N/A" %></td> <!-- Display approved budget if available -->
+                <td><%= recruitmentRequest.length > 6 ? recruitmentRequest[6] : "N/A" %></td> <!-- Display approved budget if available -->
                 <td>
                     <form action="ReviewStaffRecruitmentRequestServlet" method="post" style="display:inline;">
                         <input type="hidden" name="action" value="approve">
