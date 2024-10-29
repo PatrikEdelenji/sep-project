@@ -45,37 +45,23 @@ public class ViewMyTasksServlet extends HttpServlet {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            throw new ServletException("Error reading event request data", e);
+            throw new ServletException("Error reading task data", e);
         } catch (CsvValidationException ex) {
             ex.printStackTrace();
         }
-
-        System.out.println("Total tasks loaded: " + allTasks.size());
 
         // Filter tasks based on role and username
         for (String[] task : allTasks) {
             String taskAssignee = task[3];
             String taskDepartment = task[6];
 
-            if (taskAssignee.equals(username) && (taskDepartment.equals("General") || taskDepartment.equals(role))) {
+            // Include task if assigned to the user or relevant to the user’s department
+            if (taskAssignee.equals(username) || taskDepartment.equals("General") || taskDepartment.equals(role)) {
                 userTasks.add(task);
             }
         }
 
-        // Print filtered tasks
-        if (userTasks.isEmpty()) {
-            System.out.println("No tasks found for user: " + username + " with role: " + role);
-        } else {
-            System.out.println("Tasks found for user: " + username + " with role: " + role);
-            for (String[] task : userTasks) {
-                System.out.println("Client Record: " + task[0] + ", Event Type: " + task[1] + ", Task Description: " + task[2] + 
-                                   ", Assignee: " + task[3] + ", Priority: " + task[4] + ", Sender: " + task[5] + 
-                                   ", Department: " + task[6]);
-            }
-        }
-
-        // Set tasks as attribute and forward to JSP
-        request.setAttribute("tasks", userTasks);
+        request.setAttribute("requests", userTasks); // Set filtered tasks for frontend
         request.getRequestDispatcher("/viewMyTasks.jsp").forward(request, response);
     }
 }
