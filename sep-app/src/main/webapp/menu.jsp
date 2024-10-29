@@ -11,19 +11,38 @@
 <body>
     <h2>Welcome, ${sessionScope.username}!</h2>
 
-    <!-- Button 1: Visible only to Customer Service Officers -->
+    <!-- BVisible only to Customer Service Officers -->
     <c:if test="${sessionScope.role == 'cso'}">
         <button onclick="window.location.href='/createNewEventRequest'">Create New Event Planning Request</button>
+        
     </c:if>
 
-    <!-- Button 2: Visible to both user and admin -->
-    <c:if test="${sessionScope.role == 'cso' || sessionScope.role == 'scso'}">
-        <button>SCSO Button</button>
+    <!-- Visible only to Senior Customer Service Officers -->
+    <c:if test="${sessionScope.role == 'scso'}">
+        <button onclick="window.location.href='/viewAllNewRequests'">View New Requests</button>
+        <button onclick="window.location.href='/viewFinalApprovedRequests'">View admin approved requests</button>
     </c:if>
 
-    <!-- Button 3: Visible to everyone (guest, user, and admin) -->
-    <c:if test="${sessionScope.role == 'cso' || sessionScope.role == 'scso' || sessionScope.role == 'hr'}">
-        <button>HR Button</button>
+    <!-- Visible to finanical manager for budget reviews -->
+    <c:if test="${sessionScope.role == 'fm'}">
+        <button onclick="window.location.href='/viewSCSOApprovedRequests'">View received event requests</button>
+    </c:if>
+
+    <!-- Budget Request Button: Visible to project manager and service manager -->
+    <c:if test="${sessionScope.role == 'pm' || sessionScope.role == 'sm'}">
+        <a href="budgetRequest" class="btn btn-primary mb-2">Create Budget Request</a>
+        <a href="staffRecruitmentRequest.jsp">Staff Recruitment Requests</a>
+        <a href="viewApprovedRecruitmentRequests" class="btn btn-primary">Review Approved/Disapproved Requests</a>
+    </c:if>
+
+    <!-- Budget Request Button: Visible to financial manager -->
+    <c:if test="${sessionScope.role == 'fm'}">
+        <a href="reviewBudgetRequest.jsp">Review Budget Requests</a>
+    </c:if>
+
+    <!-- Recruitment Request Review Button: Visible to HR -->
+    <c:if test="${sessionScope.role == 'hr'}">
+        <a href="reviewStaffRecruitmentRequest.jsp">Review Staff Recruitment Requests</a>
     </c:if>
 
     <!-- Budget Request Button: Visible to project manager and service manager -->

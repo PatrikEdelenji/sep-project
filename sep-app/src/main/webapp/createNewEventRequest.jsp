@@ -88,11 +88,11 @@
 
             <fieldset class="preferences">
                 <legend>Preferences</legend>
-                <label><input type="checkbox" name="preferences" value="decorations"> Decorations</label>
-                <label><input type="checkbox" name="preferences" value="parties"> Parties</label>
-                <label><input type="checkbox" name="preferences" value="photos"> Photos/filming</label>
-                <label><input type="checkbox" name="preferences" value="meals"> Breakfast, lunch, dinner</label>
-                <label><input type="checkbox" name="preferences" value="drinks"> Soft/hot drinks</label>
+                <label><input type="checkbox" name="decorations" value="decorations"> Decorations</label>
+                <label><input type="checkbox" name="parties" value="parties"> Parties</label>
+                <label><input type="checkbox" name="photos" value="photos"> Photos/filming</label>
+                <label><input type="checkbox" name="meals" value="meals"> Breakfast, lunch, dinner</label>
+                <label><input type="checkbox" name="drinks" value="drinks"> Soft/hot drinks</label>
             </fieldset>
 
             <fieldset>
