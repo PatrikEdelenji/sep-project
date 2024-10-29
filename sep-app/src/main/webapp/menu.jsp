@@ -28,9 +28,15 @@
         <button onclick="window.location.href='/viewSCSOApprovedRequests'">View received event requests</button>
     </c:if>
 
+        <!-- Visible to finanical manager for budget reviews -->
+    <c:if test="${sessionScope.role == 'admin'}">
+        <button onclick="window.location.href='/viewFMApprovedRequests'">View FM approve requests</button>
+    </c:if>
+
           <!-- Visible to  -->
     <c:if test="${sessionScope.role == 'fm' || sessionScope.role == 'scso' || sessionScope.role == 'admin' || sessionScope.role == 'sm' || sessionScope.role == 'pm'}">
         <button onclick="window.location.href='/viewClientRecords'">View client records</button>
+        
     </c:if>
 
     <!-- Budget Request Button: Visible to project manager and service manager -->
