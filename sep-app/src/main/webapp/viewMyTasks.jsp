@@ -41,9 +41,10 @@
                 <td>${request[7]}</td> <!-- Comments to submit plans-->
                 
                 <td>
-                    <form action="viewTask" method="get" style="display: inline;">
+                    <form action="/fillCommentPage" method="get" style="display: inline;">
                         <input type="hidden" name="clientRecord" value="${request[0]}" />
-                        <button type="submit">View task</button>
+                        <input type="hidden" name="taskDescription" value="${request[2]}" />
+                        <button type="submit">Add comment</button>
                     </form>
                 </td>
             </tr>

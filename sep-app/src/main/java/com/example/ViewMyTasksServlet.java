@@ -25,7 +25,7 @@ public class ViewMyTasksServlet extends HttpServlet {
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("username");
         String role = (String) session.getAttribute("role");
-
+        System.out.println("We got here lol");
         if (username == null || role == null) {
             response.sendRedirect("login.jsp"); // Redirect to login if session is missing data
             return;
@@ -50,11 +50,19 @@ public class ViewMyTasksServlet extends HttpServlet {
             ex.printStackTrace();
         }
 
+
+
         // Filter tasks based on role and username
         for (String[] task : allTasks) {
             String taskAssignee = task[3];
+            String taskSection = task[5];
             String taskDepartment = task[6];
+            
 
+            if(taskSection.equals(role)) {
+                userTasks.add(task);
+                System.out.println("We detected pm");
+            }         
             // Include task if assigned to the user or relevant to the user’s department
             if ((taskAssignee.equals(username) && taskDepartment.equals("General")) || (taskAssignee.equals(username) && taskDepartment.equals(role))) {
                 userTasks.add(task);

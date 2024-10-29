@@ -42,6 +42,8 @@
                             <select name="assignee">
                                 <option value="Magy">Magy</option>
                                 <option value="Angelina">Angelina</option>
+                                <option value="Don">Don</option>
+                                <option value="Tom">Tom</option>
                             </select>
 
                             <label for="priority">Priority:</label>
@@ -229,7 +231,7 @@
 
 
         <!-- Services Role Sections -->
-        <c:if test="${sessionScope.role == 'services'}">
+        <c:if test="${sessionScope.role == 'sm'}">
             <div class="form-container">
                 <c:if test="${meals != 'No' && drinks != 'No'}">
                     <div class="section">
@@ -246,8 +248,11 @@
 
                             <label for="assignee">Assign to:</label>
                             <select name="assignee">
-                                <option value="Magy">Magy</option>
-                                <option value="Angelina">Angelina</option>
+                                <option value="Kate">Kate</option>
+                                <option value="Lauren">Lauren</option>
+                                <option value="Johnny">Johnny</option>
+                                <option value="Brad">Brad</option>
+                                <option value="Meryl">Meryl</option>
                             </select>
 
                             <label for="priority">Priority:</label>
@@ -303,7 +308,7 @@
                 <!-- Repeat similar sections for Photograph, Music, Graphic Design, and Computer Related -->
                 <c:if test="${meals != 'No' && drinks != 'No'}">
                     <div class="section">
-                        <h3>Waitress</h3>
+                        <h3>Waitress/Waiter</h3>
                         <form action="submitTask" method="post">
                             <label for="clientRecord">Client Record:</label>
                             <input type="text" name="clientRecord" value="${param.clientRecord}" readonly>

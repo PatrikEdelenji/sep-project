@@ -34,7 +34,7 @@
             <th>Other notes</th>
             <th>Budget</th>
             <th>Budget Review</th>
-            <c:if test="${sessionScope.role == 'pm' || sessionScope.role == 'services'}">
+            <c:if test="${sessionScope.role == 'pm' || sessionScope.role == 'sm'}">
             <th>Tasks</th>
             </c:if>
         </tr>
@@ -56,7 +56,7 @@
                 <td>${request[13]}</td> <!-- Other notes -->
                 <td>${request[14]}</td> <!-- Budget -->
                 <td>${request[15]}</td> <!-- Budget Review -->
-                <c:if test="${sessionScope.role == 'pm' || sessionScope.role == 'services'}">
+                <c:if test="${sessionScope.role == 'pm' || sessionScope.role == 'sm'}">
                 <td>
                 <form action="createTask.jsp" method="get">
                     <input type="hidden" name="clientRecord" value="${request[0]}" />

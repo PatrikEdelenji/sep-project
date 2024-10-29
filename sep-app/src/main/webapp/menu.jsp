@@ -29,7 +29,7 @@
     </c:if>
 
           <!-- Visible to  -->
-    <c:if test="${sessionScope.role == 'fm' || sessionScope.role == 'scso' || sessionScope.role == 'admin' || sessionScope.role == 'services' || sessionScope.role == 'pm'}">
+    <c:if test="${sessionScope.role == 'fm' || sessionScope.role == 'scso' || sessionScope.role == 'admin' || sessionScope.role == 'sm' || sessionScope.role == 'pm'}">
         <button onclick="window.location.href='/viewClientRecords'">View client records</button>
     </c:if>
 
@@ -52,6 +52,7 @@
 
     <!-- Budget Request Button: Visible to project manager and service manager -->
     <c:if test="${sessionScope.role == 'pm' || sessionScope.role == 'sm'}">
+        <a href="/viewMyTasks">View assigned tasks</a>
         <a href="budgetRequest" class="btn btn-primary mb-2">Create Budget Request</a>
         <a href="staffRecruitmentRequest.jsp">Staff Recruitment Requests</a>
         <a href="viewApprovedRecruitmentRequests" class="btn btn-primary">Review Approved/Disapproved Requests</a>
@@ -73,7 +74,7 @@
     </c:if>
 
             <!-- View tasks button: Visible to Production - Decorations-->
-    <c:if test="${sessionScope.role == 'Decorations'}">
+    <c:if test="${sessionScope.role == 'Decorations' || sessionScope.role == 'Waitress' || sessionScope.role == 'Chef'}">
         <button onclick="window.location.href='/viewMyTasks'">View my tasks</button>
     </c:if>
 
