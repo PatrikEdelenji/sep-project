@@ -45,7 +45,25 @@
         <a href="reviewStaffRecruitmentRequest.jsp">Review Staff Recruitment Requests</a>
     </c:if>
 
+    <!-- Budget Request Button: Visible to project manager and service manager -->
+    <c:if test="${sessionScope.role == 'pm' || sessionScope.role == 'sm'}">
+        <a href="budgetRequest" class="btn btn-primary mb-2">Create Budget Request</a>
+        <a href="staffRecruitmentRequest.jsp">Staff Recruitment Requests</a>
+        <a href="viewApprovedRecruitmentRequests" class="btn btn-primary">Review Approved/Disapproved Requests</a>
+    </c:if>
+
+    <!-- Budget Request Button: Visible to financial manager -->
+    <c:if test="${sessionScope.role == 'fm'}">
+        <a href="reviewBudgetRequest.jsp">Review Budget Requests</a>
+    </c:if>
+
+    <!-- Recruitment Request Review Button: Visible to HR -->
+    <c:if test="${sessionScope.role == 'hr'}">
+        <a href="reviewStaffRecruitmentRequest.jsp">Review Staff Recruitment Requests</a>
+    </c:if>
+
     <!-- Logout button for all users -->
         <a href="logout" class="btn btn-danger">Logout</a>
+
 </body>
 </html>

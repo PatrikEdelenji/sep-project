@@ -4,14 +4,15 @@
          http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" 
          version="3.1">
   
+  <!-- Login Servlet -->
   <servlet>
     <servlet-name>LoginServlet</servlet-name>
     <servlet-class>com.example.LoginServlet</servlet-class>
   </servlet>
-
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/login</url-pattern>
   </servlet-mapping>
+
 
 </web-app>
