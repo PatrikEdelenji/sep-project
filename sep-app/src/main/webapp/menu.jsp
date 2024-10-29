@@ -28,17 +28,6 @@
         <button onclick="window.location.href='/viewSCSOApprovedRequests'">View received event requests</button>
     </c:if>
 
-        <!-- Visible to admin department for final review -->
-    <c:if test="${sessionScope.role == 'admin'}">
-        <button onclick="window.location.href='/viewFMApprovedRequests'">View received event requests</button>
-    </c:if>
-
-
-    <c:if test="${sessionScope.role == 'admin' || sessionScope.role == 'fm' || sessionScope.role == 'scso'}">
- 
-        <button onclick="window.location.href='/viewClientRecords'">View client records</button>
-    </c:if>
-
     <!-- Budget Request Button: Visible to project manager and service manager -->
     <c:if test="${sessionScope.role == 'pm' || sessionScope.role == 'sm'}">
         <a href="budgetRequest" class="btn btn-primary mb-2">Create Budget Request</a>
@@ -58,6 +47,18 @@
 
     <!-- Logout button for all users -->
         <a href="logout" class="btn btn-danger">Logout</a>
+
+
+            <!-- Visible to admin department for final review -->
+    <c:if test="${sessionScope.role == 'admin'}">
+        <button onclick="window.location.href='/viewFMApprovedRequests'">View received event requests</button>
+    </c:if>
+
+
+    <c:if test="${sessionScope.role == 'admin' || sessionScope.role == 'fm' || sessionScope.role == 'scso'}">
+ 
+        <button onclick="window.location.href='/viewClientRecords'">View client records</button>
+    </c:if>
 
     
 </body>
