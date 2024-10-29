@@ -56,7 +56,7 @@ public class ViewMyTasksServlet extends HttpServlet {
             String taskDepartment = task[6];
 
             // Include task if assigned to the user or relevant to the user’s department
-            if (taskAssignee.equals(username) || taskDepartment.equals("General") || taskDepartment.equals(role)) {
+            if ((taskAssignee.equals(username) && taskDepartment.equals("General")) || (taskAssignee.equals(username) && taskDepartment.equals(role))) {
                 userTasks.add(task);
             }
         }

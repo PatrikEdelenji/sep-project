@@ -73,7 +73,7 @@
     </c:if>
 
             <!-- View tasks button: Visible to Production - Decorations-->
-    <c:if test="${sessionScope.role == 'Decoration'}">
+    <c:if test="${sessionScope.role == 'Decorations'}">
         <button onclick="window.location.href='/viewMyTasks'">View my tasks</button>
     </c:if>
 
