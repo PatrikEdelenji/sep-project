@@ -47,8 +47,5 @@
 
     <!-- Logout button for all users -->
         <a href="logout" class="btn btn-danger">Logout</a>
-
-
-    
 </body>
 </html>
