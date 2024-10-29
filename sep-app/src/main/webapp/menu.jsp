@@ -67,6 +67,16 @@
         <a href="reviewStaffRecruitmentRequest.jsp">Review Staff Recruitment Requests</a>
     </c:if>
 
+        <!-- View tasks button: Visible to Production - Decoration Magy-->
+    <c:if test="${sessionScope.role == 'magy'}">
+        <a href="reviewStaffRecruitmentRequest.jsp">Review Staff Recruitment Requests</a>
+    </c:if>
+
+            <!-- View tasks button: Visible to Production - Decorations-->
+    <c:if test="${sessionScope.role == 'Decoration'}">
+        <button onclick="window.location.href='/viewMyTasks'">View my tasks</button>
+    </c:if>
+
 
     <!-- Logout button for all users -->
         <a href="logout" class="btn btn-danger">Logout</a>

@@ -31,7 +31,7 @@ public class SubmitTaskServlet extends HttpServlet {
 
         // Path to save tasks to CSV
         String projectRoot = System.getProperty("user.dir");
-        String filePath = projectRoot + "/data/tasks_csv.csv";
+        String filePath = projectRoot + "/data/employee_tasks.csv";
 
         // Write data to CSV format
         try (CSVWriter csvWriter = new CSVWriter(new FileWriter(filePath, true))) {
@@ -43,7 +43,8 @@ public class SubmitTaskServlet extends HttpServlet {
                 assignee,
                 priority,
                 sender,
-                department
+                department,
+                "-"
             };
 
             // Write to CSV
@@ -53,7 +54,6 @@ public class SubmitTaskServlet extends HttpServlet {
             throw new ServletException("Error saving task data", e);
         }
 
-        // Redirect back to a task confirmation page or main page
         response.sendRedirect("/viewClientRecords");
     }
 }
