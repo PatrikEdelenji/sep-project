@@ -23,7 +23,7 @@ public class EmployeeTaskCommentServlet extends HttpServlet {
         String[] recordData = null;
 
         String projectRoot = System.getProperty("user.dir");
-        String filePath = projectRoot + "/data/approved_scso.csv";
+        String filePath = projectRoot + "/data/employee_task.csv";
 
         // Use OpenCSV CSVReader
         try (CSVReader csvReader = new CSVReader(new FileReader(filePath))) {
