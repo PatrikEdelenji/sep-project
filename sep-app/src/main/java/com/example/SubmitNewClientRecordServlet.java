@@ -1,7 +1,5 @@
 package com.example;
 
-import com.opencsv.CSVWriter;
-
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -10,6 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.opencsv.CSVWriter;
 
 @WebServlet("/submitNewClientRecord")
 public class SubmitNewClientRecordServlet extends HttpServlet {
@@ -26,17 +26,20 @@ public class SubmitNewClientRecordServlet extends HttpServlet {
         String toDate = request.getParameter("toDate");
         String expectedAttendees = request.getParameter("expectedAttendees");
         String budget = request.getParameter("budget");
+        String budgetReview = request.getParameter("budgetReview");
+        String computerNotes = request.getParameter("computerNotes");
+        String otherNotes = request.getParameter("otherNotes");
 
-        // Retrieve optional description fields, defaulting to an empty string if they aren't provided
-        String decorationsDescription = (request.getParameter("decorationsDescription") != null) ? request.getParameter("decorationsDescription") : "";
-        String partiesDescription = (request.getParameter("partiesDescription") != null) ? request.getParameter("partiesDescription") : "";
-        String photosDescription = (request.getParameter("photosDescription") != null) ? request.getParameter("photosDescription") : "";
-        String mealsDescription = (request.getParameter("mealsDescription") != null) ? request.getParameter("mealsDescription") : "";
-        String drinksDescription = (request.getParameter("drinksDescription") != null) ? request.getParameter("drinksDescription") : "";
+        // Retrieve optional description fields, set to "No" if empty or not provided
+        String decorationsDescription = (request.getParameter("decorationsDescription") == null || request.getParameter("decorationsDescription").equalsIgnoreCase("No")) ? "No" : request.getParameter("decorationsDescription");
+        String partiesDescription = (request.getParameter("partiesDescription") == null || request.getParameter("partiesDescription").equalsIgnoreCase("No")) ? "No" : request.getParameter("partiesDescription");
+        String photosDescription = (request.getParameter("photosDescription") == null || request.getParameter("photosDescription").equalsIgnoreCase("No")) ? "No" : request.getParameter("photosDescription");
+        String mealsDescription = (request.getParameter("mealsDescription") == null || request.getParameter("mealsDescription").equalsIgnoreCase("No")) ? "No" : request.getParameter("mealsDescription");
+        String drinksDescription = (request.getParameter("drinksDescription") == null || request.getParameter("drinksDescription").equalsIgnoreCase("No")) ? "No" : request.getParameter("drinksDescription");
 
         // Path to save the expanded client records CSV file
         String projectRoot = System.getProperty("user.dir");
-        String filePath = projectRoot + "/data/client_records.csv";
+        String filePath = projectRoot + "/data/client_record.csv";
 
         // Write data in CSV format
         try (CSVWriter csvWriter = new CSVWriter(new FileWriter(filePath, true))) {
@@ -54,8 +57,16 @@ public class SubmitNewClientRecordServlet extends HttpServlet {
                 photosDescription,
                 mealsDescription,
                 drinksDescription,
-                budget
+                computerNotes,
+                otherNotes,
+                budget,
+                budgetReview
             };
+
+            System.out.println("partiesDescription: " + partiesDescription);
+            System.out.println("photosDescription: " + photosDescription);
+            System.out.println("mealsDescription: " + mealsDescription);
+            System.out.println("drinksDescription: " + drinksDescription);
 
             // Write the data as a new row in the CSV file
             csvWriter.writeNext(record);

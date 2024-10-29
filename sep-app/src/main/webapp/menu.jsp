@@ -36,7 +36,7 @@
 
     <c:if test="${sessionScope.role == 'admin' || sessionScope.role == 'fm' || sessionScope.role == 'scso'}">
  
-        <button onclick="window.location.href='/viewCLientRecords'">View client records</button>
+        <button onclick="window.location.href='/viewClientRecords'">View client records</button>
     </c:if>
 
     

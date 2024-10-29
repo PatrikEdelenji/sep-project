@@ -104,7 +104,7 @@
 
             <fieldset>
                 <legend>Budget review</legend>
-                <label for="budget">Expected Budget:</label>
+                <label for="budget">Budget Review:</label>
                 <textarea id="budgetReview" name="budgetReview">${budgetReview}</textarea>
             </fieldset>
 
