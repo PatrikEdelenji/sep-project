@@ -20,29 +20,29 @@ public class CreateClientRecordServletTest {
     }
 
     public void testCreateClientRecordLogic() {
-        // Setup test directory and file paths
+ 
         String testDirPath = "test_data";
         String filePath = testDirPath + "/approved_admin.csv";
 
-        // Create test directory if it doesn't exist
+
         new File(testDirPath).mkdirs();
 
-        // Prepare mock data for approved_admin.csv
+  
         List<String[]> mockData = new ArrayList<>();
         mockData.add(new String[]{"testClientRecord", "Alice Smith", "Birthday", "2024-10-01", "2024-10-02", "100", "Yes", "Yes", "No", "Yes", "Yes", "5000", "Pending"});
         mockData.add(new String[]{"anotherRecord", "Bob Johnson", "Conference", "2024-11-01", "2024-11-02", "200", "No", "No", "Yes", "Yes", "No", "10000", "Approved"});
 
-        // Write mock data to approved_admin.csv
+
         try (CSVWriter writer = new CSVWriter(new FileWriter(filePath))) {
             writer.writeAll(mockData);
         } catch (IOException e) {
             System.err.println("Error writing mock data to approved_admin.csv: " + e.getMessage());
         }
 
-        // Mock client record to retrieve
+
         String clientRecordToRetrieve = "testClientRecord";
         
-        // Run retrieval logic
+
         String[] retrievedRecord = null;
         try (CSVReader csvReader = new CSVReader(new FileReader(filePath))) {
             String[] record;
@@ -56,7 +56,7 @@ public class CreateClientRecordServletTest {
             System.err.println("Error reading mock data: " + e.getMessage());
         }
 
-        // Verification
+
         boolean isRecordRetrievedCorrectly = retrievedRecord != null 
                 && retrievedRecord[0].equals("testClientRecord")
                 && retrievedRecord[1].equals("Alice Smith")
@@ -74,7 +74,7 @@ public class CreateClientRecordServletTest {
 
         System.out.println("Test Create Client Record Logic: " + (isRecordRetrievedCorrectly ? "PASSED" : "FAILED"));
 
-        // Cleanup test files
+
         cleanupTestFiles(testDirPath);
     }
 

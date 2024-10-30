@@ -9,13 +9,13 @@ public class LoginTest {
     public static void main(String[] args) {
         LoginTest test = new LoginTest();
         
-        // Test with existing user credentials
-        test.checkUser("user1", "test123");  // Expected to pass
-        test.checkUser("admin", "admin123"); // Expected to pass
+
+        test.checkUser("user1", "test123");  
+        test.checkUser("admin", "admin123"); 
 
         // Test with non-existing or incorrect credentials
-        test.checkUser("user1", "wrongPass");  // Expected to fail
-        test.checkUser("nonExistentUser", "test123"); // Expected to fail
+        test.checkUser("user1", "wrongPass");  
+        test.checkUser("nonExistentUser", "test123"); 
     }
 
     public void checkUser(String username, String password) {
@@ -26,7 +26,7 @@ public class LoginTest {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] userDetails = line.split(",");
-                if (userDetails.length >= 2) {  // Ensure the line has at least username and password
+                if (userDetails.length >= 2) {  
                     String fileUsername = userDetails[0].trim();
                     String filePassword = userDetails[1].trim();
 
