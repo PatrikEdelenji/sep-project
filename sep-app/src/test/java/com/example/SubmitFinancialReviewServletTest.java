@@ -19,11 +19,11 @@ public class SubmitFinancialReviewServletTest {
     }
 
     public void testSubmitFinancialReviewLogic() {
-        // Setup test directory and file paths
+
         String testDirPath = "test_data";
         String filePath = testDirPath + "/approved_fm.csv";
 
-        // Create test directory if it doesn't exist
+ 
         new File(testDirPath).mkdirs();
 
         // Mock data for submission
@@ -43,14 +43,13 @@ public class SubmitFinancialReviewServletTest {
             "Pending"           // budgetReview
         };
 
-        // Write mock data to approved_fm.csv (simulating form submission)
         try (CSVWriter writer = new CSVWriter(new FileWriter(filePath, true))) {
             writer.writeNext(submittedRecord);
         } catch (IOException e) {
             System.err.println("Error writing mock data to approved_fm.csv: " + e.getMessage());
         }
 
-        // Verification
+
         boolean isRecordSaved = false;
         try (CSVReader csvReader = new CSVReader(new FileReader(filePath))) {
             List<String[]> records = csvReader.readAll();
@@ -66,7 +65,6 @@ public class SubmitFinancialReviewServletTest {
 
         System.out.println("Test Submit Financial Review Logic: " + (isRecordSaved ? "PASSED" : "FAILED"));
 
-        // Cleanup test files
         cleanupTestFiles(testDirPath);
     }
 
