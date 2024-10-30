@@ -59,8 +59,18 @@ public class CreateNewTaskServlet extends HttpServlet {
             request.setAttribute("budget", recordData[14]);
             request.setAttribute("budgetReview", recordData[15]);
 
+            System.out.println("clientRecord parameter: " + clientRecord);
+            System.out.println("File path: " + filePath);
+            System.out.println("Photos: " + recordData[9]);
+
+
+
 
         }
+
+        System.out.println("clientRecord parameter: " + clientRecord);
+        System.out.println("File path: " + filePath);
+        System.out.println("Photos: " + recordData[9]);
 
         request.getRequestDispatcher("/createTask.jsp").forward(request, response);
     }
