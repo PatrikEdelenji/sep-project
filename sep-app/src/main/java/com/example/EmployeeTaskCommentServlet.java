@@ -25,11 +25,10 @@ public class EmployeeTaskCommentServlet extends HttpServlet {
         String projectRoot = System.getProperty("user.dir");
         String filePath = projectRoot + "/data/employee_task.csv";
 
-        // Use OpenCSV CSVReader
         try (CSVReader csvReader = new CSVReader(new FileReader(filePath))) {
             String[] columns;
             while ((columns = csvReader.readNext()) != null) {
-                if (columns[0].equals(clientRecord)) { // Match client record
+                if (columns[0].equals(clientRecord)) { 
                     recordData = columns;
                     break;
                 }
@@ -53,7 +52,6 @@ public class EmployeeTaskCommentServlet extends HttpServlet {
 
         }
 
-        // Forward to the comment JSP page
         request.getRequestDispatcher("/commentTaskPage.jsp").forward(request, response);
     }
 }

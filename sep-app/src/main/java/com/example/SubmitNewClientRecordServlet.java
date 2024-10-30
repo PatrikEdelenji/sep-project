@@ -17,7 +17,6 @@ public class SubmitNewClientRecordServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
-        // Retrieve form data
         String clientRecord = request.getParameter("clientRecord");
         String clientName = request.getParameter("clientName");
         String eventType = request.getParameter("eventType");
@@ -30,20 +29,16 @@ public class SubmitNewClientRecordServlet extends HttpServlet {
         String computerNotes = request.getParameter("computerNotes");
         String otherNotes = request.getParameter("otherNotes");
 
-        // Retrieve optional description fields, set to "No" if empty or not provided
         String decorationsDescription = (request.getParameter("decorationsDescription") == null || request.getParameter("decorationsDescription").equalsIgnoreCase("No")) ? "No" : request.getParameter("decorationsDescription");
         String partiesDescription = (request.getParameter("partiesDescription") == null || request.getParameter("partiesDescription").equalsIgnoreCase("No")) ? "No" : request.getParameter("partiesDescription");
         String photosDescription = (request.getParameter("photosDescription") == null || request.getParameter("photosDescription").equalsIgnoreCase("No")) ? "No" : request.getParameter("photosDescription");
         String mealsDescription = (request.getParameter("mealsDescription") == null || request.getParameter("mealsDescription").equalsIgnoreCase("No")) ? "No" : request.getParameter("mealsDescription");
         String drinksDescription = (request.getParameter("drinksDescription") == null || request.getParameter("drinksDescription").equalsIgnoreCase("No")) ? "No" : request.getParameter("drinksDescription");
 
-        // Path to save the expanded client records CSV file
         String projectRoot = System.getProperty("user.dir");
         String filePath = projectRoot + "/data/client_record.csv";
 
-        // Write data in CSV format
         try (CSVWriter csvWriter = new CSVWriter(new FileWriter(filePath, true))) {
-            // Prepare the data as an array of strings
             String[] record = {
                 clientRecord,
                 clientName,
@@ -68,14 +63,12 @@ public class SubmitNewClientRecordServlet extends HttpServlet {
             System.out.println("mealsDescription: " + mealsDescription);
             System.out.println("drinksDescription: " + drinksDescription);
 
-            // Write the data as a new row in the CSV file
             csvWriter.writeNext(record);
         } catch (IOException e) {
             e.printStackTrace();
             throw new ServletException("Error saving expanded event request data", e);
         }
 
-        // Redirect to a confirmation page or back to the main list
         response.sendRedirect("newClientRecordConfirmationPage.jsp");
     }
 }

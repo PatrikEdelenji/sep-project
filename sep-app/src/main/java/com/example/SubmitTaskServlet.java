@@ -18,7 +18,6 @@ public class SubmitTaskServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         
-        // Retrieve form data
         String clientRecord = request.getParameter("clientRecord");
         String eventType = request.getParameter("eventType");
         String description = request.getParameter("description");
@@ -26,16 +25,13 @@ public class SubmitTaskServlet extends HttpServlet {
         String priority = request.getParameter("priority");
         String department = request.getParameter("department");
 
-        // Get the user's role to identify the sender
+
         String sender = (String) request.getSession().getAttribute("role");
 
-        // Path to save tasks to CSV
         String projectRoot = System.getProperty("user.dir");
         String filePath = projectRoot + "/data/employee_tasks.csv";
 
-        // Write data to CSV format
         try (CSVWriter csvWriter = new CSVWriter(new FileWriter(filePath, true))) {
-            // Prepare data for CSV
             String[] record = {
                 clientRecord,
                 eventType,
@@ -47,7 +43,6 @@ public class SubmitTaskServlet extends HttpServlet {
                 "-"
             };
 
-            // Write to CSV
             csvWriter.writeNext(record);
         } catch (IOException e) {
             e.printStackTrace();

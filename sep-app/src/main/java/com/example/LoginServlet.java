@@ -15,17 +15,16 @@ import javax.servlet.http.HttpSession;
 //@WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
-    private Map<String, User> users = new HashMap<>();  // Store User objects with role
+    private Map<String, User> users = new HashMap<>();  
 
     @Override
     public void init() throws ServletException {
-        // Load users from the CSV file
         try (BufferedReader br = new BufferedReader(
                 new InputStreamReader(getClass().getClassLoader().getResourceAsStream("users.csv")))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] userDetails = line.split(",");
-                if (userDetails.length >= 3) { // Ensure there are username, password, and role
+                if (userDetails.length >= 3) { 
                     String username = userDetails[0].trim();
                     String password = userDetails[1].trim();
                     String role = userDetails[2].trim();
@@ -48,7 +47,7 @@ public class LoginServlet extends HttpServlet {
         if (user != null && user.getPassword().equals(password)) {
             HttpSession session = request.getSession();
             session.setAttribute("username", user.getUsername());
-            session.setAttribute("role", user.getRole());  // Store user role in the session
+            session.setAttribute("role", user.getRole());  
             response.sendRedirect("menu.jsp");
         } else {
             response.sendRedirect("login.jsp?error=true");

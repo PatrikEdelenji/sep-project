@@ -22,25 +22,22 @@ public class ViewApprovedRecruitmentRequestsServlet extends HttpServlet {
         List<String[]> recruitmentRequests = new ArrayList<>();
         
         // Get the real path for the CSV file
-        String csvFilePath = "C:/Users/hell0/Ivys Documents/KTH Masters/Modern Methods in Software Engineering/Homeworks/Final Project/sep-project/sep-app/data/staffRecruitmentRequests.csv";
-        
+        //String csvFilePath = "C:/Users/hell0/Ivys Documents/KTH Masters/Modern Methods in Software Engineering/Homeworks/Final Project/sep-project/sep-app/data/staffRecruitmentRequests.csv";
+        String projectRoot = System.getProperty("user.dir");
+        String csvFilePath = projectRoot + "/data/staffRecruitmentRequests.csv";
         try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
             String line;
             
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(",");
-                
-                // Need at least 6 values (role, position, department, number, justification, and at least one status)
+
                 if (values.length >= 6) {
-                    // Get all statuses from position 6 onwards
                     List<String> statuses = Arrays.asList(Arrays.copyOfRange(values, 5, values.length));
-                    
-                    // Check if any status is APPROVED or DISAPPROVED
+
                     if (statuses.stream().anyMatch(status -> 
                             status.trim().equalsIgnoreCase("APPROVED") || 
                             status.trim().equalsIgnoreCase("DISAPPROVED"))) {
-                        
-                        // Create status string combining all statuses
+
                         String combinedStatus = String.join(", ", statuses);
                         
                         recruitmentRequests.add(new String[]{

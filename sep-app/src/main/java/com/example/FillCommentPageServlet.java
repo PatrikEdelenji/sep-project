@@ -28,11 +28,10 @@ public class FillCommentPageServlet extends HttpServlet {
         String projectRoot = System.getProperty("user.dir");
         String filePath = projectRoot + "/data/employee_tasks.csv";
 
-        // Use OpenCSV CSVReader
         try (CSVReader csvReader = new CSVReader(new FileReader(filePath))) {
             String[] columns;
             while ((columns = csvReader.readNext()) != null) {
-                if (columns[0].equals(clientRecord) && columns[2].equals(taskDescription)) { // Match client record
+                if (columns[0].equals(clientRecord) && columns[2].equals(taskDescription)) { 
                     recordData = columns;
                     break;
                 }
@@ -43,7 +42,6 @@ public class FillCommentPageServlet extends HttpServlet {
         }
 
         if (recordData != null) {
-            // Populate the fields based on CSV data
             request.setAttribute("clientRecord", recordData[0]);
             request.setAttribute("eventType", recordData[1]);
             request.setAttribute("taskDescription", recordData[2]);
@@ -54,7 +52,6 @@ public class FillCommentPageServlet extends HttpServlet {
             request.setAttribute("comments", recordData[7]);
         }
 
-        // Forward to the budget review JSP page
         request.getRequestDispatcher("/commentPage.jsp").forward(request, response);
     }
 }

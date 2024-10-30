@@ -14,7 +14,6 @@ public class CreateNewEventRequestServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
-        // Forward to the JSP form page
         request.getRequestDispatcher("/createNewEventRequest.jsp").forward(request, response);
     }
 }

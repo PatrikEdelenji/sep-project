@@ -25,7 +25,6 @@ public class ViewFMApprovedEvents extends HttpServlet {
         String projectRoot = System.getProperty("user.dir");
         String filePath = projectRoot + "/data/approved_fm.csv";
 
-        // Using OpenCSV CSVReader
         try (CSVReader csvReader = new CSVReader(new FileReader(filePath))) {
             String[] columns;
             while ((columns = csvReader.readNext()) != null) {

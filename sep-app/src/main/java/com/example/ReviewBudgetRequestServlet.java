@@ -26,9 +26,14 @@ public class ReviewBudgetRequestServlet extends HttpServlet {
         String projectName = request.getParameter("projectName");
         String finalBudget = request.getParameter("finalBudget");
 
-        // Temporary file to write updated data
-        File inputFile = new File(CSV_FILE_PATH);
-        File tempFile = new File(TEMP_FILE_PATH);
+        
+
+        String projectRoot = System.getProperty("user.dir");
+        String csvFilePath = projectRoot + "/data/budgetRequest.csv";
+        String tempFilePath = projectRoot + "/data/temp_budgetRequest.csv";
+
+        File inputFile = new File(csvFilePath);
+        File tempFile = new File(tempFilePath);
 
         try (BufferedReader reader = new BufferedReader(new FileReader(inputFile));
              PrintWriter writer = new PrintWriter(new FileWriter(tempFile))) {
@@ -37,7 +42,6 @@ public class ReviewBudgetRequestServlet extends HttpServlet {
             while ((line = reader.readLine()) != null) {
                 String[] requestFields = line.split(",");
                 if (requestFields[0].equals(projectName)) {
-                    // Append the action and final budget (for approved requests) to the end of the line
                     if ("approve".equals(action)) {
                         writer.println(String.join(",", requestFields) + "," + "APPROVED" + "," + finalBudget);
                     } else {
@@ -49,12 +53,10 @@ public class ReviewBudgetRequestServlet extends HttpServlet {
             }
         }
 
-        // Replace original file with the updated file
         if (!inputFile.delete() || !tempFile.renameTo(inputFile)) {
             throw new IOException("Could not update the file with the review action.");
         }
 
-        // Redirect back to review page
         response.sendRedirect("reviewBudgetRequest.jsp?reviewSubmitted=true");
     }
 }
