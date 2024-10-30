@@ -95,39 +95,40 @@
                     </div>
                 </c:if>
             </div>
-            <div class="form-container">
-                <c:if test="${photos != 'No'}">
-                    <div class="section">
-                        <h3>Photograph</h3>
-                        <form action="submitTask" method="post">
-                            <label for="clientRecord">Client Record:</label>
-                            <input type="text" name="clientRecord" value="${param.clientRecord}" readonly>
+            <c:if test="${photos != 'No'}">
+                <div class="form-container">
+                    
+                        <div class="section">
+                            <h3>Photograph</h3>
+                            <form action="submitTask" method="post">
+                                <label for="clientRecord">Client Record:</label>
+                                <input type="text" name="clientRecord" value="${param.clientRecord}" readonly>
 
-                            <label for="eventType">Event Type:</label>
-                            <input type="text" name="eventType" value="${param.eventType}" readonly>
+                                <label for="eventType">Event Type:</label>
+                                <input type="text" name="eventType" value="${param.eventType}" readonly>
 
-                            <label for="description">Description:</label>
-                            <textarea name="description" rows="3"></textarea>
+                                <label for="description">Description:</label>
+                                <textarea name="description" rows="3"></textarea>
 
-                            <label for="assignee">Assign to:</label>
-                            <select name="assignee">
-                                <option value="Tobias">Tobias</option>
-                                <option value="Magdalena">Magdalena</option>
-                            </select>
+                                <label for="assignee">Assign to:</label>
+                                <select name="assignee">
+                                    <option value="Tobias">Tobias</option>
+                                    <option value="Magdalena">Magdalena</option>
+                                </select>
 
-                            <label for="priority">Priority:</label>
-                            <select name="priority">
-                                <option value="High">High</option>
-                                <option value="Medium">Medium</option>
-                                <option value="Medium">Low</option>
-                            </select>
+                                <label for="priority">Priority:</label>
+                                <select name="priority">
+                                    <option value="High">High</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Medium">Low</option>
+                                </select>
 
-                            <input type="hidden" name="department" value="Photos" />
-                            <button type="submit">Send Task</button>
-                        </form>
-                    </div>
-                </c:if>
-            </div>
+                                <input type="hidden" name="department" value="Photos" />
+                                <button type="submit">Send Task</button>
+                            </form>
+                        </div>
+                </div>
+        </c:if>
             <div class="form-container">
                 <c:if test="${parties != 'No'}">
                     <div class="section">
