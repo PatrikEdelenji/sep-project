@@ -1,6 +1,7 @@
 package com.example;
 
-import com.opencsv.CSVWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,8 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import java.io.FileWriter;
-import java.io.IOException;
+import com.opencsv.CSVWriter;
 
 @WebServlet("/submitBudgetReview")
 public class SubmitFinancialReviewServlet extends HttpServlet {
@@ -36,13 +36,10 @@ public class SubmitFinancialReviewServlet extends HttpServlet {
         String budget = request.getParameter("budget");
         String budgetReview = request.getParameter("budgetDescription");
 
-        // Path to save the financial review records CSV file
         String projectRoot = System.getProperty("user.dir");
         String filePath = projectRoot + "/data/approved_fm.csv";
 
-        // Write data in CSV format
         try (CSVWriter csvWriter = new CSVWriter(new FileWriter(filePath, true))) {
-            // Prepare the data as an array of strings
             String[] record = {
                 clientRecord,
                 clientName,
@@ -59,14 +56,12 @@ public class SubmitFinancialReviewServlet extends HttpServlet {
                 budgetReview
             };
 
-            // Write the data as a new row in the CSV file
             csvWriter.writeNext(record);
         } catch (IOException e) {
             e.printStackTrace();
             throw new ServletException("Error saving budget review data", e);
         }
 
-        // Redirect to a confirmation page or back to the main list
         response.sendRedirect("/viewSCSOApprovedRequests");
     }
 }

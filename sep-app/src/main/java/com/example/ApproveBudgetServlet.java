@@ -1,7 +1,10 @@
 package com.example;
 
-import com.opencsv.CSVReader;
-import com.opencsv.CSVWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,10 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-
+import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
 import com.opencsv.exceptions.CsvValidationException;
 
 @WebServlet("/approveBudget")
@@ -29,25 +30,25 @@ public class ApproveBudgetServlet extends HttpServlet {
 
         List<String[]> allRecords = new ArrayList<>();
         
-        // Read existing records and find the one to approve
+        
         try (CSVReader csvReader = new CSVReader(new FileReader(originalFilePath))) {
             String[] record;
             while ((record = csvReader.readNext()) != null) {
                 if (record[0].equals(clientRecord)) {
-                    writeRecordToCsv(approvedFilePath, record);  // Write approved record to approved_scso.csv
+                    writeRecordToCsv(approvedFilePath, record);  
                 }
-                allRecords.add(record);  // Update list with the new status for all records
+                allRecords.add(record);  
             }
         } catch (CsvValidationException ex) {
-            ex.printStackTrace();  // Log exceptions for troubleshooting
+            ex.printStackTrace();  
         }
 
-        // Update the original file to reflect approval status
+        
         try (CSVWriter csvWriter = new CSVWriter(new FileWriter(originalFilePath))) {
             csvWriter.writeAll(allRecords);
         }
 
-        // Redirect to the servlet that reloads the table with updated data
+        
         response.sendRedirect("viewAllNewRequests");
     }
 

@@ -1,13 +1,15 @@
 package com.example;
 
-import com.opencsv.CSVReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.FileReader;
-import java.io.IOException;
+
+import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 
 @WebServlet("/fillBudgetReview")
@@ -23,7 +25,6 @@ public class FillBudgetReviewServlet extends HttpServlet {
         String projectRoot = System.getProperty("user.dir");
         String filePath = projectRoot + "/data/approved_scso.csv";
 
-        // Use OpenCSV CSVReader
         try (CSVReader csvReader = new CSVReader(new FileReader(filePath))) {
             String[] columns;
             while ((columns = csvReader.readNext()) != null) {
@@ -38,7 +39,6 @@ public class FillBudgetReviewServlet extends HttpServlet {
         }
 
         if (recordData != null) {
-            // Populate the fields based on CSV data
             request.setAttribute("clientRecord", recordData[0]);
             request.setAttribute("clientName", recordData[1]);
             request.setAttribute("eventType", recordData[2]);
@@ -54,7 +54,6 @@ public class FillBudgetReviewServlet extends HttpServlet {
             request.setAttribute("budgetReview", recordData[12]);
         }
 
-        // Forward to the budget review JSP page
         request.getRequestDispatcher("/budgetReviewPage.jsp").forward(request, response);
     }
 }

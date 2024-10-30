@@ -17,8 +17,9 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet("/staffRecruitmentRequest")
 public class StaffRecruitmentRequestServlet extends HttpServlet {
-    private static final String CSV_FILE_PATH = "C:/Users/hell0/Ivys Documents/KTH Masters/Modern Methods in Software Engineering/Homeworks/Final Project/sep-project/sep-app/data/staffRecruitmentRequests.csv";
+    //private static final String CSV_FILE_PATH = "C:/Users/hell0/Ivys Documents/KTH Masters/Modern Methods in Software Engineering/Homeworks/Final Project/sep-project/sep-app/data/staffRecruitmentRequests.csv";
 
+    
 @Override
 protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
@@ -59,7 +60,10 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
         String numberOfPositions = request.getParameter("numberOfPositions");
         String justification = request.getParameter("justification");
 
-        try (FileWriter writer = new FileWriter(CSV_FILE_PATH, true);
+        String projectRoot = System.getProperty("user.dir");
+        String csvFilePath = projectRoot + "/data/staffRecruitmentRequests.csv";
+
+        try (FileWriter writer = new FileWriter(csvFilePath, true);
             PrintWriter printWriter = new PrintWriter(writer)) {
             
             printWriter.printf("%s,%s,%s,%s,%s,Pending%n", role, positionTitle, department, numberOfPositions, justification);
@@ -74,12 +78,13 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
     private List<String[]> getRecruitmentRequests() {
         List<String[]> requests = new ArrayList<>();
         
-        try (BufferedReader reader = new BufferedReader(new FileReader(CSV_FILE_PATH))) {
+        String projectRoot = System.getProperty("user.dir");
+        String csvFilePath = projectRoot + "/data/budgetRequest.csv";
+        try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] data = line.split(",");
-                // Add all requests regardless of status
-                if (data.length >= 6) {  // Make sure we have all required fields
+                if (data.length >= 6) {  
                     requests.add(data);
                 }
             }
@@ -92,8 +97,10 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
 
 private List<String[]> getApprovedDisapprovedRequests() {
     List<String[]> requests = new ArrayList<>();
-
-    try (BufferedReader reader = new BufferedReader(new FileReader(CSV_FILE_PATH))) {
+    
+    String projectRoot = System.getProperty("user.dir");
+    String csvFilePath = projectRoot + "/data/budgetRequest.csv";
+    try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
         String line;
         while ((line = reader.readLine()) != null) {
             String[] data = line.split(",");

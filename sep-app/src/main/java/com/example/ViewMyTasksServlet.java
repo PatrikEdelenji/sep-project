@@ -27,7 +27,7 @@ public class ViewMyTasksServlet extends HttpServlet {
         String role = (String) session.getAttribute("role");
         System.out.println("We got here lol");
         if (username == null || role == null) {
-            response.sendRedirect("login.jsp"); // Redirect to login if session is missing data
+            response.sendRedirect("login.jsp"); 
             return;
         }
 
@@ -37,7 +37,6 @@ public class ViewMyTasksServlet extends HttpServlet {
         String projectRoot = System.getProperty("user.dir");
         String filePath = projectRoot + "/data/employee_tasks.csv";
 
-        // Read all tasks from CSV
         try (CSVReader csvReader = new CSVReader(new FileReader(filePath))) {
             String[] columns;
             while ((columns = csvReader.readNext()) != null) {
@@ -52,7 +51,6 @@ public class ViewMyTasksServlet extends HttpServlet {
 
 
 
-        // Filter tasks based on role and username
         for (String[] task : allTasks) {
             String taskAssignee = task[3];
             String taskSection = task[5];
@@ -63,13 +61,13 @@ public class ViewMyTasksServlet extends HttpServlet {
                 userTasks.add(task);
                 System.out.println("We detected pm");
             }         
-            // Include task if assigned to the user or relevant to the user’s department
+
             if ((taskAssignee.equals(username) && taskDepartment.equals("General")) || (taskAssignee.equals(username) && taskDepartment.equals(role))) {
                 userTasks.add(task);
             }
         }
 
-        request.setAttribute("requests", userTasks); // Set filtered tasks for frontend
+        request.setAttribute("requests", userTasks);
         request.getRequestDispatcher("/viewMyTasks.jsp").forward(request, response);
     }
 }

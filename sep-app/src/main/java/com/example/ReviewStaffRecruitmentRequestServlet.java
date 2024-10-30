@@ -26,9 +26,13 @@ public class ReviewStaffRecruitmentRequestServlet extends HttpServlet {
         String positionTitle = request.getParameter("positionTitle");
         String finalNrofStaff = request.getParameter("finalNrofStaff");
         
-        // Temporary file to write updated data
-        File inputFile = new File(CSV_FILE_PATH);
-        File tempFile = new File(TEMP_FILE_PATH);
+
+        String projectRoot = System.getProperty("user.dir");
+        String csvFilePath = projectRoot + "/data/staffRecruitmentRequests.csv";
+        String tempFilePath = projectRoot + "/data/temp_staffRecruitmentRequests.csv";
+
+        File inputFile = new File(csvFilePath);
+        File tempFile = new File(tempFilePath);
 
         try (BufferedReader reader = new BufferedReader(new FileReader(inputFile));
              PrintWriter writer = new PrintWriter(new FileWriter(tempFile))) {
@@ -37,7 +41,6 @@ public class ReviewStaffRecruitmentRequestServlet extends HttpServlet {
             while ((line = reader.readLine()) != null) {
                 String[] requestFields = line.split(",");
                 
-                // Assuming positionTitle uniquely identifies the request
                 if (requestFields[1].equals(positionTitle)) {
                     if ("approve".equals(action)) {
                         writer.println(String.join(",", requestFields) + "," + "APPROVED" + "," + finalNrofStaff);
@@ -50,12 +53,10 @@ public class ReviewStaffRecruitmentRequestServlet extends HttpServlet {
             }
         }
 
-        // Replace original file with the updated file
         if (!inputFile.delete() || !tempFile.renameTo(inputFile)) {
             throw new IOException("Could not update the file with the review action.");
         }
 
-        // Redirect back to review page
         response.sendRedirect("reviewStaffRecruitmentRequest.jsp?reviewSubmitted=true");
     }
 }

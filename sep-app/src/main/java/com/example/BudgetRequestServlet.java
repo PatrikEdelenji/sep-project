@@ -49,13 +49,13 @@ public class BudgetRequestServlet extends HttpServlet {
         String requestedAmount = request.getParameter("requestedAmount");
         String justification = request.getParameter("justification");
 
-        // Here you would typically save this to a database
+        String projectRoot = System.getProperty("user.dir");
+        String originalFilePath = projectRoot + "/data/budgetRequest.csv";
 
-        // Save data to CSV file
-        try (FileWriter fileWriter = new FileWriter(CSV_FILE_PATH, true);
+
+        try (FileWriter fileWriter = new FileWriter(originalFilePath, true); // changed this with actual path using projectRoot
              PrintWriter printWriter = new PrintWriter(fileWriter)) {
 
-            // Append data to CSV in the order of form fields
             printWriter.printf("%s,%s,%s,%s%n", projectName, currentBudget, requestedAmount, justification);
 
             } catch (IOException e) {
@@ -64,7 +64,6 @@ public class BudgetRequestServlet extends HttpServlet {
                 return;
         }
 
-        // For now, we'll just redirect back to menu with a success message
         response.sendRedirect("menu.jsp?budgetRequestSubmitted=true");
     }
 }

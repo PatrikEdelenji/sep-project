@@ -24,12 +24,12 @@ public class CreateNewTaskServlet extends HttpServlet {
         String projectRoot = System.getProperty("user.dir");
         String filePath = projectRoot + "/data/client_record.csv";
 
-        // Use OpenCSV CSVReader
+
         try (CSVReader csvReader = new CSVReader(new FileReader(filePath))) {
             String[] columns;
             while ((columns = csvReader.readNext()) != null) {
                 System.out.println("Read line: " + String.join(",", columns));
-                if (columns[0].equals(clientRecord)) { // Match client record
+                if (columns[0].equals(clientRecord)) {
                     recordData = columns;
                     break;
                 }
