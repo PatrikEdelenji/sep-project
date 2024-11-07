@@ -1,6 +1,8 @@
 <%@ page import="java.io.*, java.util.*" %>
 <%
-    String csvFilePath = "C:/Users/hell0/Ivys Documents/KTH Masters/Modern Methods in Software Engineering/Homeworks/Final Project/sep-project/sep-app/data/staffRecruitmentRequests.csv"; // Update with the actual file path
+    String projectRoot = System.getProperty("user.dir");
+    String csvFilePath = projectRoot + "/data/staffRecruitmentRequests.csv";
+    //String csvFilePath = "C:/Users/patri/VScodeProjects/sep-project/sep-app/data/staffRecruitmentRequests.csv"; // Update with the actual file path
     List<String[]> requests = new ArrayList<>();
 
     try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {

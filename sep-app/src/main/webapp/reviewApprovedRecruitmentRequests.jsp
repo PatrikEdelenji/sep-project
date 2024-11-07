@@ -1,7 +1,4 @@
-<%@ page import="java.util.*" %>
-<%
-    List<String[]> recruitmentRequests = (List<String[]>) request.getAttribute("recruitmentRequests");
-%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,19 +14,15 @@
             <th>Justification</th>
             <th>Status</th>
         </tr>
-        <%
-            for (String[] request : recruitmentRequests) {
-        %>
+        <c:forEach var="recruitmentRequest" items="${recruitmentRequests}">
             <tr>
-                <td><%= request[1] %></td>
-                <td><%= request[2] %></td>
-                <td><%= request[3] %></td>
-                <td><%= request[4] %></td>
-                <td><%= request[5] %></td>
+                <td>${recruitmentRequest[0]}</td>
+                <td>${recruitmentRequest[1]}</td>
+                <td>${recruitmentRequest[2]}</td>
+                <td>${recruitmentRequest[3]}</td>
+                <td>${recruitmentRequest[4]}</td>
             </tr>
-        <%
-            }
-        %>
+        </c:forEach>
     </table>
 </body>
 </html>

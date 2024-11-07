@@ -56,7 +56,11 @@ public class ViewApprovedRecruitmentRequestsServlet extends HttpServlet {
         }
         
         request.setAttribute("recruitmentRequests", recruitmentRequests);
-        request.getRequestDispatcher("reviewapprovedrecruitmentrequests.jsp")
+        System.out.println("Request Data: ");
+        for (String[] req : recruitmentRequests) {
+            System.out.println(Arrays.toString(req)); // Print each row's contents clearly
+        }
+        request.getRequestDispatcher("reviewApprovedRecruitmentRequests.jsp")
                .forward(request, response);
     }
 }
