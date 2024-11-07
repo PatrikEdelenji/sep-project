@@ -39,13 +39,6 @@
         
     </c:if>
 
-    <!-- Budget Request Button: Visible to project manager and service manager -->
-    <c:if test="${sessionScope.role == 'pm' || sessionScope.role == 'sm'}">
-        <a href="budgetRequest" class="btn btn-primary mb-2">Create Budget Request</a>
-        <a href="staffRecruitmentRequest.jsp">Staff Recruitment Requests</a>
-        <a href="viewApprovedRecruitmentRequests" class="btn btn-primary">Review Approved/Disapproved Requests</a>
-    </c:if>
-
     <!-- Budget Request Button: Visible to financial manager -->
     <c:if test="${sessionScope.role == 'fm'}">
         <a href="reviewBudgetRequest.jsp">Review Budget Requests</a>
@@ -61,7 +54,8 @@
         <a href="/viewMyTasks">View assigned tasks</a>
         <a href="budgetRequest" class="btn btn-primary mb-2">Create Budget Request</a>
         <a href="staffRecruitmentRequest.jsp">Staff Recruitment Requests</a>
-        <a href="viewApprovedRecruitmentRequests" class="btn btn-primary">Review Approved/Disapproved Requests</a>
+        <a href="viewApprovedRecruitmentRequests" class="btn btn-primary">Review Approved Recruitment Requests</a>
+        <a href="viewApprovedBudgetRequests" class="btn btn-primary">Review Approved Budget Requests</a>
     </c:if>
 
     <!-- Budget Request Button: Visible to financial manager -->
