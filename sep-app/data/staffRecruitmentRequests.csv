@@ -1,1 +1,3 @@
-sm,chef,chef,2,need food,Pending,APPROVED,2
+sm,chef,chef,2,need food,Pending,APPROVED,2,DISAPPROVED
+pm,Worker,Decorations,2,We need more decor people,Pending,APPROVED,2,APPROVED,1
+pm,Worker,Photos,3,We need more paparazzi,Pending,APPROVED,1
